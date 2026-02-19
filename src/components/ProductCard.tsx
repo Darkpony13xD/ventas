@@ -70,7 +70,7 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
         <div className="flex items-center justify-between pt-4 border-t border-gray-700/50">
           <div>
             <span className="text-2xl font-bold text-white">${product.price.toFixed(2)}</span>
-            <span className="text-gray-500 text-sm ml-1">USD</span>
+            <span className="text-gray-500 text-sm ml-1">MXN</span>
           </div>
           <button
             onClick={() => onAddToCart(product)}
