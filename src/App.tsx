@@ -80,8 +80,8 @@ export function App() {
     <div className="min-h-screen bg-gray-950 text-white">
       {/* Background Effects */}
       <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-pink-500/15 rounded-full blur-3xl"></div>
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-yellow-400/20 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-orange-400/15 rounded-full blur-3xl"></div>
         <div className="absolute bottom-1/4 left-1/3 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl"></div>
       </div>
 
@@ -92,11 +92,11 @@ export function App() {
       <main className="relative pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         {/* Hero Section */}
         <section className="text-center py-12 md:py-20">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-500/10 border border-purple-500/30 rounded-full text-purple-400 text-sm mb-6">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-400/10 border border-yellow-400/30 rounded-full text-yellow-400 text-sm mb-6">
             <span className="animate-pulse">●</span> Servicios Activos 24/7
           </div>
           <h2 className="text-4xl md:text-6xl font-bold mb-6" style={{ fontFamily: 'Orbitron, sans-serif' }}>
-            <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-yellow-300 via-orange-400 to-yellow-300 bg-clip-text text-transparent">
               Streaming & IPTV
             </span>
             <br />
@@ -137,7 +137,7 @@ export function App() {
                 onClick={() => setActiveFilter(filter)}
                 className={`px-6 py-2.5 rounded-xl font-medium text-sm transition-all ${
                   activeFilter === filter
-                    ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-lg shadow-purple-500/25'
+                    ? 'bg-gradient-to-r from-yellow-500 to-orange-500 text-white shadow-lg shadow-yellow-400/25'
                     : 'bg-gray-800/50 text-gray-400 hover:text-white hover:bg-gray-700/50 border border-gray-700/50'
                 }`}
               >
@@ -167,7 +167,7 @@ export function App() {
         {/* Features Section */}
         <section className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="bg-gray-800/30 backdrop-blur-sm rounded-2xl p-6 border border-gray-700/50 text-center">
-            <div className="w-14 h-14 mx-auto mb-4 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl flex items-center justify-center">
+            <div className="w-14 h-14 mx-auto mb-4 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-xl flex items-center justify-center">
               <svg className="w-7 h-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
@@ -200,7 +200,7 @@ export function App() {
       <footer className="border-t border-gray-800 py-8 px-4 text-center">
         <div className="flex items-center justify-center gap-3 mb-4">
           <span className="text-3xl">🦄</span>
-          <span className="text-xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent" style={{ fontFamily: 'Orbitron, sans-serif' }}>
+          <span className="text-xl font-bold bg-gradient-to-r from-yellow-300 to-orange-400 bg-clip-text text-transparent" style={{ fontFamily: 'Orbitron, sans-serif' }}>
             DarkPony
           </span>
         </div>

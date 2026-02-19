@@ -9,17 +9,17 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
   const categoryColors = {
     streaming: 'from-blue-500 to-cyan-500',
     iptv: 'from-orange-500 to-red-500',
-    premium: 'from-purple-500 to-pink-500'
+    premium: 'from-yellow-400 to-orange-500'
   };
 
   const categoryBg = {
     streaming: 'bg-blue-500/10 border-blue-500/30',
     iptv: 'bg-orange-500/10 border-orange-500/30',
-    premium: 'bg-purple-500/10 border-purple-500/30'
+    premium: 'bg-yellow-400/10 border-yellow-400/30'
   };
 
   return (
-    <div className="group relative bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300 overflow-hidden">
+    <div className="group relative bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-gray-700/50 hover:border-yellow-400/50 transition-all duration-300 overflow-hidden">
       {/* Gradient overlay on hover */}
       <div className={`absolute inset-0 bg-gradient-to-br ${categoryColors[product.category]} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}></div>
       
@@ -74,7 +74,7 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
           </div>
           <button
             onClick={() => onAddToCart(product)}
-            className="relative px-4 py-2.5 bg-gradient-to-r from-purple-600 to-pink-600 rounded-xl text-white font-semibold text-sm overflow-hidden group/btn hover:shadow-lg hover:shadow-purple-500/25 transition-all"
+            className="relative px-4 py-2.5 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-xl text-white font-semibold text-sm overflow-hidden group/btn hover:shadow-lg hover:shadow-yellow-400/25 transition-all"
           >
             <span className="relative z-10 flex items-center gap-2">
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

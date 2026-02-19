@@ -32,12 +32,12 @@ export function Cart({
       ></div>
 
       {/* Cart Panel */}
-      <div className="absolute right-0 top-0 h-full w-full max-w-md bg-gray-900 border-l border-purple-500/20 shadow-2xl transform transition-transform duration-300">
+      <div className="absolute right-0 top-0 h-full w-full max-w-md bg-gray-900 border-l border-yellow-400/20 shadow-2xl transform transition-transform duration-300">
         <div className="flex flex-col h-full">
           {/* Header */}
           <div className="flex items-center justify-between p-6 border-b border-gray-800">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-yellow-500 to-orange-500 flex items-center justify-center">
                 <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                 </svg>
@@ -73,7 +73,7 @@ export function Cart({
                     <div className="flex-1">
                       <h4 className="font-semibold text-white">{item.name}</h4>
                       <p className="text-sm text-gray-400">{item.duration}</p>
-                      <p className="text-purple-400 font-bold mt-1">${item.price.toFixed(2)}</p>
+                      <p className="text-yellow-400 font-bold mt-1">${item.price.toFixed(2)}</p>
                     </div>
                     <button
                       onClick={() => onRemoveItem(item.id)}
