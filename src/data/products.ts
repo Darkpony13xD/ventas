@@ -114,54 +114,63 @@ export const products: Product[] = [
 
   {
     id: '12',
-    name: 'IPTV Premium 500+',
-    description: 'Más de 500 canales de TV en vivo de todo el mundo',
-    price: 9.99,
+    name: 'IPTV Kaelus',
+    description: '',
+    price: 270,
     image: '📺',
     category: 'iptv',
     duration: '1 mes',
-    features: ['500+ canales', 'HD & 4K', 'Sin cortes', 'Soporte 24/7']
+    features: ['+1800 canales', '+25000 peliculas' , '3 dispositivos', 'Tres dispositivos']
   },
   {
     id: '13',
-    name: 'IPTV Premium 1000+',
-    description: 'Más de 1000 canales premium incluyendo deportes y películas',
-    price: 14.99,
+    name: 'IPTV M327',
+    description: '',
+    price: 250,
     image: '📡',
     category: 'iptv',
     duration: '1 mes',
-    features: ['1000+ canales', '4K & FHD', 'Deportes en vivo', 'VOD incluido']
+    features: ['+1800 canales', '+25000 peliculas' , '3 dispositivos',]
   },
   {
     id: '14',
-    name: 'IPTV Deportes Total',
-    description: 'Todos los eventos deportivos en vivo',
-    price: 12.99,
-    image: '⚽',
+    name: 'IPTV Legends',
+    description: '',
+    price: 140,
+    image: '🐐',
     category: 'iptv',
     duration: '1 mes',
-    features: ['Fútbol mundial', 'UFC/Box', 'NBA/NFL', 'Multi-pantalla']
+    features: ['+1800 canales', '+2000 peliculas' , '1 dispositivos',]
   },
- 
- 
-  {
-    id: '16',
-    name: 'Combo Streaming Plus',
-    description: 'Netflix + Disney+ + HBO Max juntos',
-    price: 12.99,
-    image: '⭐',
-    category: 'premium',
+   {
+    id: '15',
+    name: 'IPTV Lokura',
+    description: '',
+    price: 130,
+    image: '😵‍💫',
+    category: 'iptv',
     duration: '1 mes',
-    features: ['3 servicios', 'Ahorro $3', 'Cuentas individuales', 'Soporte VIP']
+    features: ['+1800 series', '+2000 peliculas' , '1 dispositivos',]
+  },
+ {
+    id: '16',
+    name: 'IPTV Mundo TV',
+    description: '',
+    price: 120,
+    image: '🌐',
+    category: 'iptv',
+    duration: '1 mes',
+    features: ['+1000 series', '+2000 peliculas' , '1 dispositivos',]
   },
   {
     id: '17',
-    name: 'Pack Todo en Uno',
-    description: 'Netflix + IPTV 1000+ + Spotify Premium',
-    price: 19.99,
-    image: '🔥',
-    category: 'premium',
+    name: 'IPTV NanoTV',
+    description: '',
+    price: 120,
+    image: '🎥',
+    category: 'iptv',
     duration: '1 mes',
-    features: ['Streaming + TV', 'Máximo ahorro', 'Soporte prioritario', 'Garantía total']
-  }
+    features: ['+1000 series', '+2000 peliculas' , '1 dispositivos',]
+  },
+ 
 ];

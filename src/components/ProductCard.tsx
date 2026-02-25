@@ -3,9 +3,10 @@ import { Product } from '../types';
 interface ProductCardProps {
   product: Product;
   onAddToCart: (product: Product) => void;
+  whatsappNumber: string;
 }
 
-export function ProductCard({ product, onAddToCart }: ProductCardProps) {
+export function ProductCard({ product, onAddToCart, whatsappNumber }: ProductCardProps) {
   const categoryColors = {
     streaming: 'from-blue-500 to-cyan-500',
     iptv: 'from-orange-500 to-red-500',
@@ -18,8 +19,14 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
     premium: 'bg-yellow-400/10 border-yellow-400/30'
   };
 
+  const handleDemoClick = () => {
+    const message = `Hola! Me gustaría probar un demo de ${product.name}`;
+    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+  };
+
   return (
-    <div className="group relative bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-gray-700/50 hover:border-yellow-400/50 transition-all duration-300 overflow-hidden">
+    <div className="group relative bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-gray-700/50 hover:border-yellow-400/50 transition-all duration-300 overflow-hidden flex flex-col">
       {/* Gradient overlay on hover */}
       <div className={`absolute inset-0 bg-gradient-to-br ${categoryColors[product.category]} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}></div>
       
@@ -43,8 +50,8 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
       </div>
 
       {/* Content */}
-      <div className="p-6 pt-0 space-y-4">
-        <div>
+      <div className="relative z-10 p-6 pt-0 space-y-4 flex-grow flex flex-col">
+        <div className="flex-grow">
           <h3 className="text-lg font-bold text-white mb-1">{product.name}</h3>
           <p className="text-gray-400 text-sm line-clamp-2">{product.description}</p>
         </div>
@@ -84,6 +91,20 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
             </span>
           </button>
         </div>
+        
+        {/* Demo Button */}
+        {product.category === 'iptv' && (
+          <div className="mt-4">
+            <a
+              href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Hola! Me gustaría probar un demo de ${product.name}`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group w-full block text-center px-4 py-2.5 bg-gray-700/50 rounded-xl text-white font-semibold text-sm hover:bg-purple-500/30 active:bg-purple-500/40 transition-all duration-150"
+            >
+              🎁 Demo gratis
+            </a>
+          </div>
+        )}
       </div>
     </div>
   );

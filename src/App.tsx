@@ -63,11 +63,11 @@ export function App() {
       message += `${index + 1}. ${item.image} *${item.name}*\n`;
       message += `   📅 Duración: ${item.duration}\n`;
       message += `   🔢 Cantidad: ${item.quantity}\n`;
-      message += `   💰 Precio: $${(item.price * item.quantity).toFixed(2)} USD\n\n`;
+      message += `   💰 Precio: $${(item.price * item.quantity).toFixed(2)} MXN\n\n`;
     });
     
     message += `━━━━━━━━━━━━━━━━━━━━\n`;
-    message += `💵 *TOTAL: $${total.toFixed(2)} USD*\n\n`;
+    message += `💵 *TOTAL: $${total.toFixed(2)} MXN*\n\n`;
     message += `¡Gracias por tu compra! 🎉`;
 
     const encodedMessage = encodeURIComponent(message);
@@ -128,6 +128,25 @@ export function App() {
           </div>
         </section>
 
+        {/* IPTV Announcement */}
+        {activeFilter === 'iptv' && (
+          <section className="my-10">
+            <a
+              href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hola! Me gustaría probar IPTV gratis.')}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block p-6 bg-gray-800/50 border border-yellow-400/30 rounded-2xl text-center transition-transform transform hover:scale-105 hover:border-yellow-400"
+            >
+              <p className="text-xl font-semibold text-yellow-400">
+                <span role="img" aria-label="gift">🎁</span> ¿Quieres probar IPTV gratis?
+              </p>
+              <p className="text-lg text-gray-300 mt-2">
+                <span role="img" aria-label="phone">📲</span> Escríbenos por WhatsApp
+              </p>
+            </a>
+          </section>
+        )}
+
         {/* Filters */}
         <section className="mb-10">
           <div className="flex flex-wrap justify-center gap-3">
@@ -160,6 +179,7 @@ export function App() {
               key={product.id}
               product={product}
               onAddToCart={addToCart}
+              whatsappNumber={WHATSAPP_NUMBER}
             />
           ))}
         </section>

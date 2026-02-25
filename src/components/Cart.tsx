@@ -113,7 +113,7 @@ export function Cart({
               {/* Total */}
               <div className="flex items-center justify-between">
                 <span className="text-gray-400">Subtotal</span>
-                <span className="text-white font-bold text-xl">${total.toFixed(2)} USD</span>
+                <span className="text-white font-bold text-xl">${total.toFixed(2)} MXN</span>
               </div>
 
               {/* WhatsApp Checkout */}
