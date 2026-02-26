@@ -7,7 +7,7 @@ import { ProductCard } from './components/ProductCard';
 import { products } from './data/products';
 
 // CAMBIAR ESTE NÚMERO POR TU NÚMERO DE WHATSAPP (con código de país, sin + ni espacios)
-const WHATSAPP_NUMBER = "5658491918";
+const WHATSAPP_NUMBER = "5643587090";
 
 export function App() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
