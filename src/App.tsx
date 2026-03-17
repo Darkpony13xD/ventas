@@ -1,5 +1,5 @@
-import { CartItem, Product } from './types';
 import { useMemo, useState } from 'react';
+import { CartItem, Product } from './types';
 
 import { Cart } from './components/Cart';
 import { Header } from './components/Header';
@@ -7,12 +7,12 @@ import { ProductCard } from './components/ProductCard';
 import { products } from './data/products';
 
 // CAMBIAR ESTE NÚMERO POR TU NÚMERO DE WHATSAPP (con código de país, sin + ni espacios)
-const WHATSAPP_NUMBER = "5643587090";
+const WHATSAPP_NUMBER = "5641261649";
 
 export function App() {
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [activeFilter, setActiveFilter] = useState<'all' | 'streaming' | 'iptv' | 'premium'>('all');
+  const [activeFilter, setActiveFilter] = useState<'all' | 'streaming' | 'iptv'>('all');
 
   const filteredProducts = useMemo(() => {
     if (activeFilter === 'all') return products;
@@ -150,7 +150,7 @@ export function App() {
         {/* Filters */}
         <section className="mb-10">
           <div className="flex flex-wrap justify-center gap-3">
-            {(['all', 'streaming', 'iptv', 'premium'] as const).map((filter) => (
+            {(['all', 'streaming', 'iptv'] as const).map((filter) => (
               <button
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
@@ -162,8 +162,7 @@ export function App() {
               >
                 {filter === 'all' ? '🎬 Todos' : 
                  filter === 'streaming' ? '📺 Streaming' :
-                 filter === 'iptv' ? '📡 IPTV' :
-                 '⭐ Premium'}
+                 '📡 IPTV'}
               </button>
             ))}
           </div>
