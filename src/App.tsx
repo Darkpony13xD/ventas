@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { CartItem, Product } from './types';
 
 import { Cart } from './components/Cart';
@@ -7,17 +7,32 @@ import { ProductCard } from './components/ProductCard';
 import { products } from './data/products';
 
 // CAMBIAR ESTE NÚMERO POR TU NÚMERO DE WHATSAPP (con código de país, sin + ni espacios)
-const WHATSAPP_NUMBER = "5641261649";
+const WHATSAPP_NUMBER = "525641261649";
 
 export function App() {
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+    try {
+      const saved = localStorage.getItem('darkpony-cart');
+      return saved ? (JSON.parse(saved) as CartItem[]) : [];
+    } catch {
+      return [];
+    }
+  });
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [activeFilter, setActiveFilter] = useState<'all' | 'streaming' | 'iptv'>('all');
+  const [search, setSearch] = useState('');
+
+  useEffect(() => {
+    localStorage.setItem('darkpony-cart', JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const filteredProducts = useMemo(() => {
-    if (activeFilter === 'all') return products;
-    return products.filter(p => p.category === activeFilter);
-  }, [activeFilter]);
+    return products.filter(p => {
+      const matchesCategory = activeFilter === 'all' || p.category === activeFilter;
+      const query = search.trim().toLowerCase();
+      return matchesCategory && (!query || `${p.name} ${p.description} ${p.features.join(' ')}`.toLowerCase().includes(query));
+    });
+  }, [activeFilter, search]);
 
   const cartItemsCount = useMemo(() => {
     return cartItems.reduce((sum, item) => sum + item.quantity, 0);
@@ -73,7 +88,7 @@ export function App() {
     const encodedMessage = encodeURIComponent(message);
     const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
     
-    window.open(whatsappUrl, '_blank');
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -86,7 +101,12 @@ export function App() {
       </div>
 
       {/* Header */}
-      <Header cartItemsCount={cartItemsCount} onCartClick={() => setIsCartOpen(true)} />
+      <Header
+        cartItemsCount={cartItemsCount}
+        onCartClick={() => setIsCartOpen(true)}
+        onCategoryClick={setActiveFilter}
+        whatsappNumber={WHATSAPP_NUMBER}
+      />
 
       {/* Main Content */}
       <main className="relative pt-24 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
@@ -128,6 +148,21 @@ export function App() {
           </div>
         </section>
 
+        <section className="mb-8 mx-auto max-w-3xl">
+          <label className="relative block">
+            <span className="sr-only">Buscar productos</span>
+            <svg className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m21 21-4.35-4.35m2.1-5.4a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z" />
+            </svg>
+            <input
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              placeholder="Busca Netflix, IPTV, música..."
+              className="w-full rounded-2xl border border-gray-700 bg-gray-900/80 py-4 pl-12 pr-4 text-white outline-none transition focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/20"
+            />
+          </label>
+        </section>
+
         {/* IPTV Announcement */}
         {activeFilter === 'iptv' && (
           <section className="my-10">
@@ -154,6 +189,7 @@ export function App() {
               <button
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
+                aria-pressed={activeFilter === filter}
                 className={`px-6 py-2.5 rounded-xl font-medium text-sm transition-all ${
                   activeFilter === filter
                     ? 'bg-gradient-to-r from-yellow-500 to-orange-500 text-white shadow-lg shadow-yellow-400/25'
@@ -171,16 +207,22 @@ export function App() {
         {/* Products Grid */}
         <section 
           id="products"
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+          className="scroll-mt-24 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
         >
-          {filteredProducts.map((product) => (
+          {filteredProducts.length > 0 ? filteredProducts.map((product) => (
             <ProductCard
               key={product.id}
               product={product}
               onAddToCart={addToCart}
               whatsappNumber={WHATSAPP_NUMBER}
             />
-          ))}
+          )) : (
+            <div className="col-span-full rounded-2xl border border-gray-800 bg-gray-900/60 p-12 text-center">
+              <p className="text-4xl">🔎</p>
+              <h3 className="mt-4 text-xl font-semibold text-white">No encontramos productos</h3>
+              <p className="mt-2 text-gray-400">Prueba con otro término o limpia la búsqueda.</p>
+            </div>
+          )}
         </section>
 
         {/* Features Section */}

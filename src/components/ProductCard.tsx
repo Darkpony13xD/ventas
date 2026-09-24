@@ -19,12 +19,6 @@ export function ProductCard({ product, onAddToCart, whatsappNumber }: ProductCar
     premium: 'bg-yellow-400/10 border-yellow-400/30'
   };
 
-  const handleDemoClick = () => {
-    const message = `Hola! Me gustaría probar un demo de ${product.name}`;
-    const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-    window.open(whatsappUrl, '_blank');
-  };
-
   return (
     <div className="group relative bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-gray-700/50 hover:border-yellow-400/50 transition-all duration-300 overflow-hidden flex flex-col">
       {/* Gradient overlay on hover */}
