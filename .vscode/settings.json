@@ -1,0 +1,7 @@
+{
+  "terminal.integrated.env.windows": {
+    "Path": "C:\\Program Files\\nodejs;C:\\Users\\Darck\\AppData\\Local\\GitHubDesktop\\app-3.6.6\\resources\\app\\git\\cmd;${env:Path}"
+  },
+  "git.path": "C:\\Users\\Darck\\AppData\\Local\\GitHubDesktop\\app-3.6.6\\resources\\app\\git\\cmd\\git.exe",
+  "terminal.integrated.defaultProfile.windows": "Command Prompt"
+}

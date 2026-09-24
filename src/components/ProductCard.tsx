@@ -1,105 +1,15 @@
-import { Product } from '../types';
-
-interface ProductCardProps {
-  product: Product;
-  onAddToCart: (product: Product) => void;
-  whatsappNumber: string;
-}
-
-export function ProductCard({ product, onAddToCart, whatsappNumber }: ProductCardProps) {
-  const categoryColors = {
-    streaming: 'from-blue-500 to-cyan-500',
-    iptv: 'from-orange-500 to-red-500',
-    premium: 'from-yellow-400 to-orange-500'
-  };
-
-  const categoryBg = {
-    streaming: 'bg-blue-500/10 border-blue-500/30',
-    iptv: 'bg-orange-500/10 border-orange-500/30',
-    premium: 'bg-yellow-400/10 border-yellow-400/30'
-  };
-
-  return (
-    <div className="group relative bg-gray-800/50 backdrop-blur-sm rounded-2xl border border-gray-700/50 hover:border-yellow-400/50 transition-all duration-300 overflow-hidden flex flex-col">
-      {/* Gradient overlay on hover */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${categoryColors[product.category]} opacity-0 group-hover:opacity-5 transition-opacity duration-300`}></div>
-      
-      {/* Category badge */}
-      <div className="absolute top-4 left-4 z-10">
-        <span className={`px-3 py-1 text-xs font-semibold uppercase tracking-wider rounded-full border ${categoryBg[product.category]} text-gray-300`}>
-          {product.category}
-        </span>
-      </div>
-
-      {/* Product Icon */}
-      <div className="relative pt-8 pb-4 px-6">
-        <div className="flex justify-center">
-          <div className="relative">
-            <div className={`absolute inset-0 bg-gradient-to-br ${categoryColors[product.category]} blur-2xl opacity-30 group-hover:opacity-50 transition-opacity`}></div>
-            <span className="relative text-7xl block transform group-hover:scale-110 transition-transform duration-300">
-              {product.image}
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 p-6 pt-0 space-y-4 flex-grow flex flex-col">
-        <div className="flex-grow">
-          <h3 className="text-lg font-bold text-white mb-1">{product.name}</h3>
-          <p className="text-gray-400 text-sm line-clamp-2">{product.description}</p>
-        </div>
-
-        {/* Features */}
-        <div className="flex flex-wrap gap-2">
-          {product.features.slice(0, 3).map((feature, idx) => (
-            <span key={idx} className="text-xs bg-gray-700/50 text-gray-300 px-2 py-1 rounded-md">
-              {feature}
-            </span>
-          ))}
-        </div>
-
-        {/* Duration badge */}
-        <div className="flex items-center gap-2 text-gray-500 text-sm">
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          {product.duration}
-        </div>
-
-        {/* Price and Add to Cart */}
-        <div className="flex items-center justify-between pt-4 border-t border-gray-700/50">
-          <div>
-            <span className="text-2xl font-bold text-white">${product.price.toFixed(2)}</span>
-            <span className="text-gray-500 text-sm ml-1">MXN</span>
-          </div>
-          <button
-            onClick={() => onAddToCart(product)}
-            className="relative px-4 py-2.5 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-xl text-white font-semibold text-sm overflow-hidden group/btn hover:shadow-lg hover:shadow-yellow-400/25 transition-all"
-          >
-            <span className="relative z-10 flex items-center gap-2">
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-              </svg>
-              Agregar
-            </span>
-          </button>
-        </div>
-        
-        {/* Demo Button */}
-        {product.category === 'iptv' && (
-          <div className="mt-4">
-            <a
-              href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(`Hola! Me gustaría probar un demo de ${product.name}`)}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group w-full block text-center px-4 py-2.5 bg-gray-700/50 rounded-xl text-white font-semibold text-sm hover:bg-purple-500/30 active:bg-purple-500/40 transition-all duration-150"
-            >
-              🎁 Demo gratis
-            </a>
-          </div>
-        )}
-      </div>
+import type { CSSProperties } from 'react';
+import type { Product } from '../types';
+import { brandFor, isMusic, money, whatsapp } from '../utils/store';
+import { Icon } from './Icon';
+export function ProductCard({ product, quantity, onAdd }: { product: Product; quantity: number; onAdd: (product: Product) => void }) {
+  const brand = brandFor(product);
+  return <article className="product-card" style={{ '--brand': brand.color, '--brand-bg': brand.background } as CSSProperties}>
+    <div className="product-art"><span className="product-category">{product.category === 'iptv' ? 'TV EN VIVO' : isMusic(product) ? 'MÚSICA & VIDEO' : 'STREAMING'}</span><span className={`service-mark service-${product.id}`}>{brand.mark}</span><span className="art-orbit" /><span className="art-caption">{brand.label}</span></div>
+    <div className="product-body"><div className="product-heading"><h3>{product.name.trim()}</h3>{quantity > 0 && <span className="selected-badge"><Icon name="check" size={12} />{quantity}</span>}</div><p className="product-description">{product.description || 'Tu próxima noche de películas empieza aquí. Consulta el catálogo disponible.'}</p>
+      <div className="product-features">{[...new Set(product.features.map(f => f.trim()))].slice(0, 2).map(feature => <span key={feature}><Icon name="check" size={12} />{feature}</span>)}</div>
+      <div className="product-buy"><div><span className="price">{money(product.price)}</span><span className="currency"> MXN</span><small>por {product.duration.trim()}</small></div><button className="add-button" onClick={() => onAdd(product)} aria-label={`Agregar ${product.name.trim()}, ${product.duration.trim()}`}><Icon name="plus" size={18} /><span>Agregar</span></button></div>
+      {product.category === 'iptv' && <a className="demo-link" href={whatsapp(`Hola, me gustaría solicitar una demo de ${product.name}.`)} target="_blank" rel="noreferrer">Solicitar demo gratis <Icon name="arrow" size={14} /></a>}
     </div>
-  );
+  </article>;
 }
